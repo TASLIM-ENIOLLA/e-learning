@@ -50,17 +50,7 @@ export default function Index(){
                                 <div className = 'row'>{(
                                     (courseList.length > 0)
                                     ? courseList.map((each, key) => (
-                                        <CourseCard onClick = {() => {
-                                            if(accountType === 'user'){
-                                                window.location = `/courses/${each.id}`
-                                            }
-                                            else{
-                                                toast({
-                                                    type: 'secondary',
-                                                    message: 'You have to be logged in before you can book a course!'
-                                                });
-                                            }
-                                        }} courseData = {each} key = {key} />
+                                        <CourseCard href = {false} courseData = {each} key = {key} />
                                     ))
                                     : (
                                         <div className = 'p-5 mx-auto col-lg-10'>

@@ -49,7 +49,7 @@ export default function _SignUp({continue_url}){
                                 ...formData,
                                 f_name: e.target.value
                             })
-                        }} type = "text" className = "d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
+                        }} type = "text" className = "bold d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
                     </div>
                     <div className = "mb-4">
                         <span className = "text-capitalize bold letter-spacing-1">last name</span>
@@ -58,7 +58,7 @@ export default function _SignUp({continue_url}){
                                 ...formData,
                                 l_name: e.target.value
                             })
-                        }} type = "text" className = "d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
+                        }} type = "text" className = "bold d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
                     </div>
                     <div className = "mb-4">
                         <span className = "text-capitalize bold letter-spacing-1">employee ID</span>
@@ -67,7 +67,7 @@ export default function _SignUp({continue_url}){
                                 ...formData,
                                 empID: e.target.value
                             })
-                        }} type = "text" className = "d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
+                        }} type = "text" className = "bold d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
                     </div>
                     <div className = "mb-4">
                         <span className = "text-capitalize bold letter-spacing-1">email address</span>
@@ -76,7 +76,7 @@ export default function _SignUp({continue_url}){
                                 ...formData,
                                 email: e.target.value
                             })
-                        }} type = "email" className = "d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
+                        }} type = "email" className = "bold d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
                     </div>
                     <div className = "mb-4">
                         <span className = "text-capitalize bold letter-spacing-1">select MDA</span>
@@ -85,7 +85,7 @@ export default function _SignUp({continue_url}){
                                 ...formData,
                                 MDA: e.target.value
                             })
-                        }} className = "d-block text-capitalize w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3">
+                        }} className = "bold d-block text-capitalize w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3">
                             <option value = ''>--- No MDA selected ---</option>
                             {
                                 MDAs.sort().map(
@@ -103,7 +103,7 @@ export default function _SignUp({continue_url}){
                                 ...formData,
                                 accessCode: e.target.value
                             })
-                        }} type = "text" className = "d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
+                        }} type = "text" className = "bold d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
                     </div>
                     <div className = "mb-4">
                         <span className = "text-capitalize bold letter-spacing-1">password</span>
@@ -112,7 +112,7 @@ export default function _SignUp({continue_url}){
                                 ...formData,
                                 password: e.target.value
                             })
-                        }} type = "password" className = "d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
+                        }} type = "password" className = "bold d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
                     </div>
                     <div className = "mb-4">
                         <span className = "text-capitalize bold letter-spacing-1">confirm password</span>
@@ -124,7 +124,7 @@ export default function _SignUp({continue_url}){
                         }} type = "password" className = "d-block w-100 mt-2 rounded border border-secondary shadow-sm bg-clear p-3" />
                     </div>
                     <div className = "mb-4 pt-3">
-                        <input value = "Sign up" type = "submit" className = {"d-block w-100 mt-2 rounded border-0 shadow transit bg-dark-blue text-uppercase text-white bold letter-spacing-1 p-3" + (
+                        <input value = "Sign up" type = "submit" className = {"bold d-block w-100 mt-2 rounded border-0 shadow transit bg-dark-blue text-uppercase text-white bold letter-spacing-1 p-3" + (
                             (![formData.empID, formData.accessCode, formData.c_password, formData.email, formData.MDA, formData.password, formData.f_name, formData.l_name].includes(''))
                             ? ""
                             : " disabled"

@@ -510,7 +510,7 @@ export const CourseCard = ({courseData, onClick, registered = false, href = true
                         )}</span>
                     </div>
                     <div className = 'text-capitalize flex-h'>
-                        <span className = 'flex-1 italic pb-2 single-line'>{(
+                        <span className = 'flex-1 pb-2 single-line'>{(
                             (typeof courseData === 'object' && courseData.description !== undefined)
                             ? courseData.description
                             : 'lorem ipsum dolor sit amet consectuer'

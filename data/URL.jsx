@@ -3,13 +3,8 @@ import {useRouter} from 'next/router'
 export const URL = {
 	dashboard: [
 		{name: 'dashboard', href: `/dashboard`, iconName: 'speedometer2'},
-		// {name: 'projects', href: `/dashboard/projects`, iconName: 'briefcase'},
-		// {name: 'tasks', href: `/dashboard/tasks`, iconName: 'clipboard2-check'},
-		{name: 'courses', href: `/dashboard/courses`, iconName: 'journals'},
-		// {name: 'community', href: `/dashboard/community`, iconName: 'people'},
+		{name: 'my courses', href: `/dashboard/my-courses`, iconName: 'journals'},
 		{name: 'profile', href: `/dashboard/membership`, iconName: 'person-circle'},
-		// {name: 'referrals', href: `/dashboard/referrals`, iconName: 'diagram-3'},
-		// {name: 'capital', href: `/dashboard/capital`, iconName: 'currency-exchange'},
 		{name: 'logout', href: `/dashboard/logout`, iconName: 'door-open-fill text-danger'},
 	],
 	admin: [
