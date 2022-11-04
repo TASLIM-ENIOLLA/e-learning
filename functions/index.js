@@ -1,11 +1,24 @@
-export const parseObjectToFormData = (objectFormData, strict = false) => {
-	const formData = new FormData()
+// export const parseObjectToFormData = (objectFormData, strict = false) => {
+// 	const formData = new FormData()
+//
+// 	for(let props in objectFormData){
+//        !strict || objectFormData[props] ? formData.append(props, objectFormData[props]) : undefined
+// 	}
+//
+// 	return formData
+// }
+export const parseObjectToFormData = (object) => {
+    const formData = new FormData()
 
-	for(let props in objectFormData){
-       !strict || objectFormData[props] ? formData.append(props, objectFormData[props]) : undefined
-	}
+    for(let prop in object){
+        let formElementValue = object[prop]
+        if(typeof formElementValue !== 'object' || formElementValue.type)
+            formData.append(prop, formElementValue)
+        else if(Array.isArray(formElementValue))
+            formElementValue.forEach(each => formData.append(prop, each))
+    }
 
-	return formData
+    return formData
 }
 
 export const cookieStore = {
@@ -26,7 +39,8 @@ export const cookieStore = {
     ),
 	set: ({name, value, expires, path}) => new Promise((res) => {
         res(document.cookie = `${name}=${value};expires=${new Date(expires)};path=${path}`)
-    })
+    }),
+	remove: (name) => new Promise((res) => res(document.cookie = `${name}=null;expires=${new Date(0)};path=/`))
 }
 
 

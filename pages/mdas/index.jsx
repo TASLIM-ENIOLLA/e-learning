@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react'
 import {TopRibbon, NavBar, SearchBar, Footer, CourseCard} from '../../components/pages'
 import {toast} from '../../components/toast'
-import {server} from '../../config'
+import {server, API} from '../../config'
+import {parseObjectToFormData} from '/functions'
 
 export default function MDA(){
     const [MDAlist, setMDAlist] = useState([])
@@ -13,7 +14,10 @@ export default function MDA(){
     ]
 
     useEffect(() => {
-        fetch(`${server.backend.url}/php/processes/admin/mdas.php`)
+        fetch(API.user.mdas, {
+            method: 'POST',
+            body: parseObjectToFormData({account_type: 'user'})
+        })
         .then(res => res.json())
         .then(({data}) => setMDAlist(data))
     }, [])

@@ -1,12 +1,7 @@
 import {cookieStore} from '/functions'
 import Template from '/components/dashboard/Template'
 
-export default function Index(){
-    const routeArray = [
-        'available-courses',
-        'registered-courses',
-        'completed-courses'
-    ]
+export default function Logout(){
     return (
         <Template>
             <div className="row a-i-c">
@@ -21,7 +16,7 @@ export default function Index(){
                             <p className = ''>Are you sure you want to logout?</p>
                         </div>
                         <div className = 'col-auto'>
-                            <button onClick = {() => cookieStore.remove('E_LEARNING').then(e => window.location = '/')} className = 'bg-danger px-5 py-3 rounded-1x border-0 shadow-sm bold text-capitalize text-white'>logout</button>
+                            <button onClick = {() => cookieStore.remove('E_LEARNING_ADMIN').then(e => window.location = '/')} className = 'bg-danger px-5 py-3 rounded-1x border-0 shadow-sm bold text-capitalize text-white'>logout</button>
                         </div>
                         <div className = 'col-auto'>
                             <button className = 'px-5 py-3 rounded-1x border-0 shadow-sm bold text-capitalize text-dark'>cancel</button>
@@ -31,4 +26,20 @@ export default function Index(){
             </div>
         </Template>
     )
+}
+
+export function getServerSideProps(context){
+    const {req: {cookies}} = context
+    const cookie = cookies['E_LEARNING_ADMIN']
+
+    if(!cookie) return {
+        redirect: {
+            destination: './login'
+        }
+    }
+
+    return {props: {
+        jwt_token: cookie,
+        account_type: './admin'
+    }}
 }

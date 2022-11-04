@@ -1,20 +1,10 @@
-import {
-    useEffect, useState
-} from 'react'
-import {
-    TopRibbon, NavBar, SearchBar, Footer, CourseCard
-} from '/components/pages'
-import {
-    toast
-} from '/components/toast'
-import {
-    server
-} from '/config'
-import {
-    cookieStore
-} from '/functions'
+import {useEffect, useState} from 'react'
+import {TopRibbon, NavBar, SearchBar, Footer, CourseCard} from '/components/pages'
+import {toast} from '/components/toast'
+import {server} from '/config'
+import {cookieStore} from '/functions'
 
-export default ({continue_url}) => {
+export default function Login({continue_url}){
     const [formData, setFormData] = useState({
         empID: '',
         password: ''
@@ -67,7 +57,7 @@ export default ({continue_url}) => {
                                     if(res.type === 'success'){
                                         cookieStore.set({
                                             name: 'E_LEARNING',
-                                            value: JSON.stringify({...res.data, accountType: 'user'}),
+                                            value: res.data,
                                             expires: (new Date().getTime() + (30 * 24 * 3600 * 1000)),
                                             path: '/'
                                         }).then(() => {

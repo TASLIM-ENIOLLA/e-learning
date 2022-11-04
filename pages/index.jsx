@@ -1,13 +1,17 @@
 import {useEffect, useState} from 'react'
-import {TopRibbon, NavBar, SearchBar, Footer, Banner, CourseCard} from '../components/pages'
+import {TopRibbon, NavBar, SearchBar, Footer, Banner} from '../components/pages'
 import {toast} from '../components/toast'
-import {server} from '../config'
+import {server, API} from '../config'
+import {parseObjectToFormData} from '/functions'
 
 export default function Index(){
     const [courseList, setCourseList] = useState([])
 
     useEffect(() => {
-        fetch(`${server.backend.url}/php/processes/admin/courses.php`)
+        fetch(API.user.courses, {
+            method: 'POST',
+            body: parseObjectToFormData({account_type: 'user'})
+        })
         .then(res => res.json())
         .then(({data}) => setCourseList(data))
     }, [])
@@ -16,7 +20,6 @@ export default function Index(){
         <section>
             <TopRibbon />
             <NavBar />
-            <SearchBar />
             <Banner />
             <section>
                 <div className = 'py-5'>
@@ -48,17 +51,19 @@ export default function Index(){
                             </p>
                             <div className = 'container mt-5'>
                                 <div className = 'row'>{(
-                                    (courseList.length > 0)
-                                    ? courseList.map((each, key) => (
-                                        <CourseCard href = {false} courseData = {each} key = {key} />
-                                    ))
-                                    : (
-                                        <div className = 'p-5 mx-auto col-lg-10'>
-                                            <div className = 'border shadow-sm rounded-1x p-5 text-c text-muted bold letter-spacing-1 text-capitalize'>
-                                                There are no other courses available
+                                    (courseList)
+                                    ? (courseList.length > 0)
+                                        ? courseList.map((each, key) => (
+                                            <CourseCard {...each} key = {key} />
+                                        ))
+                                        : (
+                                            <div className = 'p-5 mx-auto col-lg-10'>
+                                                <div className = 'border shadow-sm rounded-1x p-5 text-c text-muted bold letter-spacing-1 text-capitalize'>
+                                                    There are no other courses available
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
+                                        )
+                                    : <></>
                                 )}</div>
                             </div>
                         </div>
@@ -67,5 +72,34 @@ export default function Index(){
             </section>
             <Footer />
         </section>
+    )
+}
+
+
+export const CourseCard = ({name, mda_name, description, modules}) => {
+    return (
+        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 mb-5">
+            <div className = 'row p-3 border bg-white rounded-1x'>
+                <div className = 'col-xs-12 px-0'>
+                    <div style = {{width: '150px', height: '150px'}} className = 'border signup-bg rounded'></div>
+                </div>
+                <div className = 'col-xs-12 col px-0 flex-1 px-3 py-2'>
+                    <div className = 'text-capitalize flex-h bold letter-spacing-1'>
+                        <span className = 'flex-1 fo-s-20 text-orange pb-2 single-line'>{name}</span>
+                    </div>
+                    <div className = 'text-capitalize flex-h bold letter-spacing-1'>
+                        <span className = 'flex-1 fo-s-15 pb-2 single-line'>{mda_name}</span>
+                    </div>
+                    <div className = 'text-capitalize flex-h'>
+                        <span className = 'flex-1 pb-2 single-line'>{description}</span>
+                    </div>
+                    <div className = 'row mt-3'>
+                        <div className="col-12 px-0">
+                            <button onClick = {() => toast({type: 'secondary', message: 'Please login to view course data'})} className = 'd-block text-c w-100 px-4 py-2 border rounded shadow underline-0 text-white single-line text-capitalize light-blue-btn'>view course</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
